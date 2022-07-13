@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     private var sessionId: Int = 0
     private var downloadState: Int? = null
+
     @SuppressLint("SwitchIntDef")
     private val listener = SplitInstallStateUpdatedListener { splitInstallSessionState ->
         downloadState = splitInstallSessionState.status()
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         if (splitInstallSessionState.sessionId() == sessionId) {
             when (splitInstallSessionState.status()) {
                 SplitInstallSessionStatus.INSTALLED -> {
+                    println("Installed!")
                     if (VERSION.SDK_INT >= VERSION_CODES.O) {
                         SplitInstallHelper.updateAppInfo(this@MainActivity)
                     }
@@ -75,6 +77,21 @@ class MainActivity : AppCompatActivity() {
             acbInstantDelivery.setOnClickListener {
                 Toast.makeText(this@MainActivity, "Soon to be develop", Toast.LENGTH_SHORT).show()
             }
+
+            // Only can be tested minimum on internal app sharing
+            acbUninstallInstallTimeDelivery.setOnClickListener {
+                if (splitInstallManager.installedModules.contains(resources.getString(R.string.install_time_delivery_module_name))) {
+                    println("Uninstall module install time delivery")
+                    splitInstallManager.deferredUninstall(listOf(resources.getString(R.string.install_time_delivery_module_name)))
+                }
+            }
+            // Only can be tested minimum on internal app sharing
+            acbUninstallOnDemandDelivery.setOnClickListener {
+                if (splitInstallManager.installedModules.contains(resources.getString(R.string.on_demand_delivery_module_name))) {
+                    println("Uninstall module on demand delivery")
+                    splitInstallManager.deferredUninstall(listOf(resources.getString(R.string.on_demand_delivery_module_name)))
+                }
+            }
         }
     }
 
@@ -99,14 +116,17 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SwitchIntDef")
     private fun downloadOnDemandDeliveryModule() {
         if (splitInstallManager.installedModules.contains(resources.getString(R.string.on_demand_delivery_module_name))) {
+            println("Module is exist")
             goToOnDemandDeliveryPage()
         } else {
+            println("Module doesn't exist")
             if (sessionId != 0) {
                 downloadState = null
                 splitInstallManager.cancelInstall(sessionId)
             }
             val request =
-                SplitInstallRequest.newBuilder().addModule(resources.getString(R.string.on_demand_delivery_module_name))
+                SplitInstallRequest.newBuilder()
+                    .addModule(resources.getString(R.string.on_demand_delivery_module_name))
                     .build()
             splitInstallManager.startInstall(request).addOnFailureListener { exception ->
                 when ((exception as SplitInstallException).errorCode) {
