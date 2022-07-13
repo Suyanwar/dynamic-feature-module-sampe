@@ -5,7 +5,7 @@ package com.example.dynamicfeaturemoduleexample
  */
 object ActivityConstant {
     const val InstallTimeDelivery = "com.example.dynamicfeatureinstalltime.InstallTimeDeliveryActivity"
-    const val OnDemandDelivery = ""
+    const val OnDemandDelivery = "com.example.dynamicfeatureondemand.OnDemandDeliveryActivity"
     const val ConditionalDelivery = ""
     const val InstantDelivery = ""
 }

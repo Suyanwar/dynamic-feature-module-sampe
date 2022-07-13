@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="com.example.dynamicfeatureondemand"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <dist:module
+        dist:instant="false"
+        dist:title="@string/text_on_demand_delivery">
+        <dist:delivery>
+            <dist:on-demand />
+        </dist:delivery>
+        <dist:fusing dist:include="true" />
+    </dist:module>
+    <application
+        android:name="com.google.android.play.core.splitcompat.SplitCompatApplication">
+        <activity
+            android:name=".OnDemandDeliveryActivity"
+            android:exported="true"
+            android:label="On Demand Delivery" />
+    </application>
+</manifest>

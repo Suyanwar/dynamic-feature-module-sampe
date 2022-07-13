@@ -5,7 +5,7 @@
 
     <dist:module
         dist:instant="false"
-        dist:title="@string/title_dynamicfeatureinstalltime">
+        dist:title="@string/text_install_time_delivery">
         <dist:delivery>
             <dist:install-time>
                 <dist:removable dist:value="true" />
