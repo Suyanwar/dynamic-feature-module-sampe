@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "DynamicFeatureModuleExample"
-include ':app', ':dynamicfeatureinstalltime', ':dynamicfeatureondemand'
+include ':app', ':dynamicfeatureinstalltime', ':dynamicfeatureondemand', ':dynamicfeatureinstant'

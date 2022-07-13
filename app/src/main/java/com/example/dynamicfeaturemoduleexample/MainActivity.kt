@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dynamicfeaturemoduleexample.ActivityConstant.InstallTimeDelivery
+import com.example.dynamicfeaturemoduleexample.ActivityConstant.InstantDelivery
 import com.example.dynamicfeaturemoduleexample.ActivityConstant.OnDemandDelivery
 import com.example.dynamicfeaturemoduleexample.databinding.ActivityMainBinding
 import com.google.android.play.core.splitinstall.SplitInstallException
@@ -75,7 +76,11 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity, "Soon to be develop", Toast.LENGTH_SHORT).show()
             }
             acbInstantDelivery.setOnClickListener {
-                Toast.makeText(this@MainActivity, "Soon to be develop", Toast.LENGTH_SHORT).show()
+                InstantDelivery.loadClassOrNull<AppCompatActivity>()?.let {
+                    Intent(this@MainActivity, it)
+                }?.also {
+                    startActivity(it)
+                }
             }
 
             // Only can be tested minimum on internal app sharing

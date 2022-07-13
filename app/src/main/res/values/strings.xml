@@ -8,4 +8,5 @@
     <string name="text_uninstall_on_demand_delivery">Uninstall On Demand Delivery</string>
     <string name="install_time_delivery_module_name">dynamicfeatureinstalltime</string>
     <string name="on_demand_delivery_module_name">dynamicfeatureondemand</string>
+    <string name="instant_delivery_module_name">dynamicfeatureinstant</string>
 </resources>
