@@ -98,18 +98,13 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SwitchIntDef")
     private fun downloadOnDemandDeliveryModule() {
-        println("Masuk sini")
         if (splitInstallManager.installedModules.contains(resources.getString(R.string.on_demand_delivery_module_name))) {
             goToOnDemandDeliveryPage()
-            println("Masuk sini 1")
         } else {
-            println("Masuk sini 2")
             if (sessionId != 0) {
-                println("Masuk sini 3")
                 downloadState = null
                 splitInstallManager.cancelInstall(sessionId)
             }
-            println("Masuk sini 4")
             val request =
                 SplitInstallRequest.newBuilder().addModule(resources.getString(R.string.on_demand_delivery_module_name))
                     .build()
@@ -132,22 +127,16 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 }
-                println(exception.errorCode)
-                println("Masuk sini 5")
             }.addOnSuccessListener { sessionIdModule ->
-                println("Masuk sini 6")
                 sessionId = sessionIdModule
             }
         }
     }
 
     private fun goToOnDemandDeliveryPage() {
-        println("Masuk sini 7")
         OnDemandDelivery.loadClassOrNull<AppCompatActivity>()?.let {
-            println("Masuk sini 8")
             Intent(this@MainActivity, it)
         }?.also {
-            println("Masuk sini 9")
             startActivity(it)
         }
     }
