@@ -1,8 +1,10 @@
 package com.example.dynamicfeaturemoduleexample
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.dynamicfeaturemoduleexample.ActivityConstant.InstallTimeDelivery
 import com.example.dynamicfeaturemoduleexample.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -17,7 +19,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.run {
             acbInstallTimeDelivery.setOnClickListener {
-                Toast.makeText(this@MainActivity, "Soon to be develop", Toast.LENGTH_SHORT).show()
+                InstallTimeDelivery.loadClassOrNull<AppCompatActivity>()?.let {
+                    Intent(this@MainActivity, it)
+                }?.also {
+                    startActivity(it)
+                }
             }
             acbOnDemandDelivery.setOnClickListener {
                 Toast.makeText(this@MainActivity, "Soon to be develop", Toast.LENGTH_SHORT).show()
